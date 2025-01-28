@@ -33,6 +33,14 @@ def main():
         CalcEntry.config(state='normal')  # Enable entry for updating
         CalcEntry.delete(0, tk.END)      # Clear current text
         CalcEntry.config(state='disabled')  # Disable entry again
+
+    def delete_entry():
+        CalcEntry.config(state='normal')  # Enable entry for updating
+        current_text = CalcEntry.get()    # Get current text in the entry
+        CalcEntry.delete(0, tk.END)      # Clear current text
+        current_text = current_text[:-1]
+        CalcEntry.insert(0, current_text)  # Append new value to existing text
+        CalcEntry.config(state='disabled')  # Disable entry again
     
     def enter():
         current_text = CalcEntry.get()    # Get current text in the entry
@@ -93,11 +101,36 @@ def main():
     buttonPower = tk.Button(gui, text=" ^ ", background="grey", foreground="white", font=("SF UI Text Heavy", 12) , command=lambda: update_entry("**"))
     buttonPower.place(x=102,y=50)
 
-    buttonClear = tk.Button(gui, text=" C ", background="grey", foreground="white", font=("SF UI Text Heavy", 12) , command=lambda: clear_entry())
-    buttonClear.place(x=10,y=50)
+    buttonClear = tk.Button(gui, text=" C ", background="grey", foreground="white", width=1, font=("SF UI Text Heavy", 12) , command=lambda: clear_entry())
+    buttonClear.place(x=7,y=50)
+
+    buttonDelete = tk.Button(gui, text=" AC ", background="grey", foreground="white", width=1, font=("SF UI Text Heavy", 12) , command=lambda: delete_entry())
+    buttonDelete.place(x=27,y=50)
+
 
     buttonEqualTo = tk.Button(gui, text=" = ", background="black", foreground="white", font=("SF UI Text Heavy", 12) ,  command=lambda: enter())
     buttonEqualTo.place(x=300,y=250)
+
+    gui.bind('<KeyPress-1>', lambda event: update_entry("1"))
+    gui.bind('<KeyPress-2>', lambda event: update_entry("2"))
+    gui.bind('<KeyPress-3>', lambda event: update_entry("3"))
+    gui.bind('<KeyPress-4>', lambda event: update_entry("4"))
+    gui.bind('<KeyPress-5>', lambda event: update_entry("5"))
+    gui.bind('<KeyPress-6>', lambda event: update_entry("6"))
+    gui.bind('<KeyPress-7>', lambda event: update_entry("7"))
+    gui.bind('<KeyPress-8>', lambda event: update_entry("8"))
+    gui.bind('<KeyPress-9>', lambda event: update_entry("9"))
+    gui.bind('<KeyPress-0>', lambda event: update_entry("0"))
+    gui.bind('<KeyPress-*>', lambda event: update_entry("*"))
+    gui.bind('<KeyPress-/>', lambda event: update_entry("/"))
+    gui.bind('<KeyPress-minus>', lambda event: update_entry("-"))
+    gui.bind('<KeyPress-+>', lambda event: update_entry("+"))
+    gui.bind('<KeyPress-.>', lambda event: update_entry("."))
+    gui.bind('<KeyPress-^>', lambda event: update_entry("**"))
+    gui.bind('<KeyPress-%>', lambda event: percentage())
+    gui.bind('<Return>', lambda event: enter())
+    gui.bind('<BackSpace>', lambda event: clear_entry())
+    gui.bind('<Delete>', lambda event: delete_entry())
 
     gui.mainloop()
 
