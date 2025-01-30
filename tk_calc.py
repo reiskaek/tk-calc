@@ -49,7 +49,7 @@ def main():
         CalcEntry.delete(0, tk.END)      # Clear current text
         CalcEntry.insert(0, solved_text)  # Append new value to existing text
         CalcEntry.config(state='disabled')  # Disable entry again
-
+        
     button1 = tk.Button(gui, text=" 1 ", background="orange",  font=("SF UI Text Heavy", 12), command=lambda: update_entry("1"))
     button1.place(x=10,y=100)
 
@@ -129,8 +129,8 @@ def main():
     gui.bind('<KeyPress-^>', lambda event: update_entry("**"))
     gui.bind('<KeyPress-%>', lambda event: percentage())
     gui.bind('<Return>', lambda event: enter())
-    gui.bind('<BackSpace>', lambda event: clear_entry())
-    gui.bind('<Delete>', lambda event: delete_entry())
+    gui.bind('<BackSpace>', lambda event: delete_entry())
+    gui.bind('<Delete>', lambda event: clear_entry())
 
     gui.mainloop()
 
