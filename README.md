@@ -1,1 +1,1 @@
-# tk_calc
+# tk-calc
